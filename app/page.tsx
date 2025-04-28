@@ -6,7 +6,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[600px]">
         <Image
-          src="/hero-image3.png"
+          src="/hero-image.jpg"
           alt="Piecyk Bistro - Pizza z pieca opalanego drewnem"
           fill
           className="object-cover z-0"
