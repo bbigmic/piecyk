@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={`${inter.className} bg-piecyk-beige`}>
-        <header className="bg-piecyk-beige shadow-md">
+        <header className="bg-piecyk-beige">
           <Navigation />
         </header>
         <main>
