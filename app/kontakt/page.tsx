@@ -12,11 +12,51 @@ export default function Contact() {
     guests: '2',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Tutaj można dodać logikę wysyłania formularza
-    console.log('Form data:', formData)
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      const response = await fetch('/api/admin/reservations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          date: formData.date,
+          time: formData.time,
+          guests: parseInt(formData.guests),
+          message: formData.message,
+        }),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          time: '',
+          guests: '2',
+          message: '',
+        })
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Błąd podczas wysyłania formularza:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -36,6 +76,16 @@ export default function Contact() {
           {/* Formularz rezerwacji */}
           <div className="bg-white p-8 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-6">Zarezerwuj stolik</h2>
+            {submitStatus === 'success' && (
+              <div className="mb-4 p-4 bg-green-100 text-green-700 rounded-md">
+                Rezerwacja została wysłana! Skontaktujemy się z Tobą wkrótce.
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-md">
+                Wystąpił błąd podczas wysyłania rezerwacji. Spróbuj ponownie później.
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -147,9 +197,10 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-md font-semibold transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-md font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Zarezerwuj
+                {isSubmitting ? 'Wysyłanie...' : 'Zarezerwuj'}
               </button>
             </form>
           </div>
@@ -161,8 +212,8 @@ export default function Contact() {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold">Adres</h3>
-                  <p>ul. Przykładowa 123</p>
-                  <p>00-000 Warszawa</p>
+                  <p>Wielopolska 54</p>
+                  <p>39-200 Dębica</p>
                 </div>
                 <div>
                   <h3 className="font-semibold">Telefon</h3>
@@ -174,8 +225,9 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-semibold">Godziny otwarcia</h3>
-                  <p>Poniedziałek - Piątek: 12:00 - 22:00</p>
-                  <p>Sobota - Niedziela: 11:00 - 23:00</p>
+                  <p>Poniedziałek - Czwartek: 7:00 - 21:00</p>
+                  <p>Piątek - Sobota: 7:00 - 22:00</p>
+                  <p>Niedziela: 12:00 - 21:00</p>
                 </div>
               </div>
             </div>
@@ -184,7 +236,7 @@ export default function Contact() {
               <h2 className="text-2xl font-bold mb-6">Lokalizacja</h2>
               <div className="aspect-w-16 aspect-h-9">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.6500000000005!2d21.0125!3d52.2297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669a869f01%3A0x72f0be2a88ead3fc!2sWarszawa!5e0!3m2!1spl!2spl!4v1645000000000!5m2!1spl!2spl"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2562.019825151207!2d21.416500012544!3d50.0484599161071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473d0910dde96821%3A0x774ad77dc2e310f9!2sPiecyk%20%7C%20Piekarnia%20%E2%80%A2%20Pizzeria%20%E2%80%A2%20Bistro!5e0!3m2!1spl!2spl!4v1745874466330!5m2!1spl!2spl"
                   width="100%"
                   height="300"
                   style={{ border: 0 }}

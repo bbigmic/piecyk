@@ -12,13 +12,13 @@ export default function Home() {
           className="object-cover z-0"
           priority
         />
-        <div className="absolute inset-0 bg-black/70 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-8 p-20">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_50%)]">
             Piecyk Bistro
           </h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_50%)] max-w-2xl font-medium">
-            Prawdziwa pizza z pieca opalanego drewnem i świeże wypieki
+            Serce włoskiej pizzy 🍕 i chleba na zakwasie w Dębicy
           </p>
           <a
             href="/menu"

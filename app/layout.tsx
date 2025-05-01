@@ -6,8 +6,8 @@ import Navigation from './components/Navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Piecyk Bistro - Pizza z pieca opalanego drewnem',
-  description: 'Prawdziwa pizza z pieca opalanego drewnem i świeże wypieki. Najlepsza pizza i pieczywo w mieście.',
+  title: 'Piecyk Bistro - Serce włoskiej pizzy 🍕 i chleba na zakwasie w Dębicy',
+  description: 'Prawdziwa pizza z pieca opalanego drewnem i świeże wypieki. Najlepsza pizza i pieczywo w mieście. Serce włoskiej pizzy 🍕 i chleba na zakwasie w Dębicy',
 }
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={`${inter.className} bg-piecyk-beige`}>
-        <header className="bg-piecyk-beige">
+        <header className="bg-piecyk-beige shadow-md">
           <Navigation />
         </header>
         <main>
@@ -29,15 +29,15 @@ export default function RootLayout({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
                 <h3 className="text-xl font-bold mb-4">Kontakt</h3>
-                <p>ul. Przykładowa 123</p>
-                <p>00-000 Warszawa</p>
+                <p>Wielopolska 54</p>
+                <p>39-200 Dębica</p>
                 <p>Tel: +48 123 456 789</p>
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-4">Godziny otwarcia</h3>
-                <p>Poniedziałek - Piątek: 12:00 - 22:00</p>
-                <p>Sobota - Niedziela: 11:00 - 23:00</p>
-                <p className="mt-2 text-sm">Piekarnia otwarta od 7:00</p>
+                <p>Poniedziałek - Czwartek: 7:00 - 21:00</p>
+                <p>Piątek - Sobota: 7:00 - 22:00</p>
+                <p>Niedziela: 12:00 - 21:00</p>
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-4">Śledź nas</h3>
